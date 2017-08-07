@@ -24,3 +24,5 @@ exec sp_spaceused
 
 -- Generer script pour selectionner les fichiers des difféerentes BD usagers
 Select 'USE ' + QUOTENAME(name) + ' SELECT name, filename from sysdatabases where dbid >5 ' from sysdatabases where dbid >5
+
+
