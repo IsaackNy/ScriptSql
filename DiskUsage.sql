@@ -3,7 +3,7 @@ DECLARE @dbsize bigint,
         @ftsize bigint,
         @reservedpages int,
         @usedpages int,
-        @pages int,
+        @pages int
         
 
 --Disk usage - datafiles
@@ -17,7 +17,7 @@ SELECT @reservedpages = SUM(a.total_pages)
        ,@pages = SUM(CASE 
                         WHEN it.internal_type IN (202,204) THEN 0 
                         WHEN a.type != 1 THEN a.used_pages 
-                        WHEN p.index_id &lt; 2 THEN a.data_pages 
+                        WHEN p.index_id < 2 THEN a.data_pages 
                         ELSE 0 
                      END) 
 FROM sys.partitions p  
@@ -25,9 +25,10 @@ JOIN sys.allocation_units a ON p.partition_id = a.container_id
 LEFT JOIN sys.internal_tables it ON p.object_id = it.object_id 
 
 SELECT 
-        @dbsize as ''dbsize'',
-        @logsize as ''logsize'',
-        @ftsize as ''ftsize'',
-        @reservedpages as ''reservedpages'',
-        @usedpages as ''usedpages'',
-        @pages as ''pages''
+        @dbsize as dbsize,
+        @logsize as logsize,
+        @ftsize as ftsize,
+        @reservedpages as reservedpages,
+        @usedpages as usedpages,
+        @pages as pages
+
