@@ -1,3 +1,11 @@
+DECLARE @dbsize bigint,
+        @logsize bigint,
+        @ftsize bigint,
+        @reservedpages int,
+        @usedpages int,
+        @pages int,
+        
+
 --Disk usage - datafiles
 SELECT @dbsize = SUM(convert(bigint,case when type = 0 then size else 0 end)) 
       ,@logsize = SUM(convert(bigint,case when type = 1 then size else 0 end)) 
